@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { FaExternalLinkSquareAlt, FaLink } from 'react-icons/fa';
 import {
   Select,
   SelectContent,
@@ -129,17 +130,20 @@ export function ProjectSection() {
             href={selectedProject.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
+            className="text-blackhover:underline flex items-center gap-2"
+            aria-label={`GitHub repository for ${selectedProject.title}`}
           >
-            GitHub
+            <p>REPO</p> <FaExternalLinkSquareAlt className="w-5 h-5" aria-hidden="true" />
           </a>
           <a
             href={selectedProject.demoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
+            className="text-gray-500 hover:underline flex items-center gap-2"
+            aria-label={`Live demo for ${selectedProject.title}`}
           >
-            Live Demo
+            <p>URL</p>
+            <FaLink className="w-5 h-5" aria-hidden="true" />
           </a>
         </div>
       </div>
