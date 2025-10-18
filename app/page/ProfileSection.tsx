@@ -7,7 +7,7 @@ export function ProfileSection() {
       <div className="flex flex-row items-start gap-4 mb-4">
         {/* Profile Image */}
         <img
-          src="https://via.placeholder.com/100"
+          src="/profile.jpeg"
           alt="Profile"
           className="rounded w-32 h-32 object-cover bg-black dark:bg-white "
         />
