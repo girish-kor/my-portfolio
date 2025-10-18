@@ -21,8 +21,8 @@ export function ProfileSection() {
             className="wave text-8xl mb-1 text-gray-800 dark:text-gray-100"
             aria-hidden="true"
           />
-          <h2 className="text-xl font-bold">Girish Kor</h2>
-          <p className="text-gray-600 dark:text-gray-300">Software Developer</p>
+          <h2 className="lg:text-4xl text-2xl font-bold">Girish Kor</h2>
+          <p className="text-gray-600 dark:text-gray-300 lg:text-lg text-sm">Software Developer</p>
         </div>
       </div>
       {/* DIVISION 2: Description & Social Links */}
