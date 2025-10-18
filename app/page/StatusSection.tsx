@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
+import { Button } from '~/components/ui/button';
 
 export function StatusSection() {
   const status = [
@@ -40,18 +41,24 @@ export function StatusSection() {
 
       {/* Navigation buttons */}
       <div className="flex flex-col gap-1 ml-4">
-        <button
-          className="flex items-center justify-center border rounded-full p-1 hover:opacity-70"
+        <Button
+          variant="outline"
+          size="icon"
           onClick={handlePrev}
+          aria-label="Previous status"
+          className="p-1"
         >
           <FaArrowUp />
-        </button>
-        <button
-          className="flex items-center justify-center border rounded-full p-1 hover:opacity-70"
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
           onClick={handleNext}
+          aria-label="Next status"
+          className="p-1"
         >
           <FaArrowDown />
-        </button>
+        </Button>
       </div>
     </div>
   );
