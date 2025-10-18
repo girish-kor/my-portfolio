@@ -32,7 +32,7 @@ export function ProfileSection() {
           <div className="flex gap-4">
             {/* GitHub */}
             <a
-              href="https://github.com/username"
+              href="https://github.com/girish-kor"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-800 dark:text-gray-100 hover:text-blue-500"
@@ -42,7 +42,7 @@ export function ProfileSection() {
 
             {/* LinkedIn */}
             <a
-              href="https://linkedin.com/in/username"
+              href="https://www.linkedin.com/in/girish-kor-52078a349"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-800 dark:text-gray-100 hover:text-blue-700"
