@@ -93,7 +93,7 @@ export function ProjectSection() {
           <h4>
             <strong>Title:</strong> {selectedProject.title}
           </h4>
-          <p>
+          <p className="text-justify mt-2">
             <strong>Description:</strong> {selectedProject.description}
           </p>
           <p>

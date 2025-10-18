@@ -20,8 +20,8 @@ export function ProfileSection() {
       </div>
       {/* DIVISION 2: Description & Social Links */}
       <div>
-        <div>
-          <p className="text-gray-700 dark:text-gray-200">
+        <div className="mt-3">
+          <p className="text-gray-700 dark:text-gray-200 text-justify">
             Passionate software developer with experience in building scalable web applications.
             Skilled in React, JavaScript, and modern web technologies, with a strong focus on clean
             code and user-friendly interfaces.
