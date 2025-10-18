@@ -13,7 +13,7 @@ export function SkillsSection() {
   ];
 
   return (
-    <div className="font-sans grid grid-cols-2 gap-2">
+    <div className="font-sans grid grid-cols-2 lg:grid-cols-1 gap-2">
       {skills.map((skill) => (
         <div key={skill.name}>
           <div className="relative w-full h-6 bg-gray-200 dark:bg-black rounded overflow-hidden flex items-center text-xs font-semibold border-black dark:border-white border-1">
