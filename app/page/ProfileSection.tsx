@@ -37,7 +37,7 @@ export function ProfileSection() {
               rel="noopener noreferrer"
               className="text-gray-800 dark:text-gray-100 hover:text-blue-500"
             >
-              <FaGithub size={24} />
+              <FaGithub size={27} />
             </a>
 
             {/* LinkedIn */}
@@ -47,7 +47,7 @@ export function ProfileSection() {
               rel="noopener noreferrer"
               className="text-gray-800 dark:text-gray-100 hover:text-blue-700"
             >
-              <FaLinkedin size={24} />
+              <FaLinkedin size={27} />
             </a>
           </div>
           <div>
@@ -56,10 +56,12 @@ export function ProfileSection() {
               href="./resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex gap-1 p-1 items-center bg-black dark:bg-white text-white dark:text-black rounded hover:opacity-80"
+              className="flex items-center hover:opacity-80"
             >
-              <span>RESUME</span>
-              <FaFileAlt size={20} />
+              <span className="border-2 border-black dark:border-white pl-2 border-r-0">
+                RESUME
+              </span>
+              <FaFileAlt size={27} className="" />
             </a>
           </div>
         </div>
