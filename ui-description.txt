@@ -1,0 +1,137 @@
+countSection.tsx
+
+Overview:
+A compact, centered numeric display that highlights the total number of projects. It appears as a square (or square-like) widget with a clear numeric value and a small label beneath it, designed to be visually prominent within a grid or sidebar of widgets.
+
+Visual layout and hierarchy:
+- Container: Square-oriented visual box with consistent padding and a thin border. The layout centers its content both vertically and horizontally.
+- Number: Large, bold numeric text (primary visual focus). The number uses a large font size and high contrast so it reads clearly at a glance.
+- Label: A smaller, medium-weight text directly beneath the big number that reads "Project Count" to describe the metric.
+
+Behavior and interaction:
+- Static display: This component does not require user interaction. It presents a snapshot of a single numeric metric.
+- Accessibility: The number is announced to assistive technologies via polite live region semantics so screen readers will pick up updates without being intrusive.
+
+Usage context and responsive behavior:
+- In small screens it remains centered within the row and keeps its square/compact shape. On larger screens it sits in a column of widgets and aligns consistently with other stacked widgets.
+
+
+educationSection.tsx
+
+Overview:
+A vertically-stacked education card presenting a single entry: the degree title, the year, and the institution name. It's designed to be read quickly while fitting into a profile column or central content area.
+
+Visual layout and hierarchy:
+- Container: Rectangular card with padding, a thin border, and vertical spacing between elements.
+- Top row: A horizontal row containing two elements—on the left the degree title (larger, semibold text), and on the right the year (small, lighter text). They are aligned center vertically and spaced apart so the title is the visual lead.
+- Body: A short single-line or multi-line paragraph showing the college name in smaller body text.
+
+Behavior and interaction:
+- Static card: No interactive controls. It's informational only.
+- Readability: Spacing and typography emphasize the degree; the year is visually de-emphasized but still easily scanned.
+
+Usage context and responsive behavior:
+- On narrow viewports it stacks naturally and remains readable. Within a profile column the card pairs with other profile-related content.
+
+
+heroSection.tsx
+
+Overview:
+A prominent, full-width hero widget that provides three concurrent bits of live information: a global news headline, a small localized temperature reading, and a live clock with date and optional location coordinates. The component blends utility (time and weather) with timely content (news headline) and acts as the primary top-of-page information panel.
+
+Visual layout and hierarchy:
+- Container: Full-width bordered section with internal vertical flex layout separating the headline area (top) and the status row (bottom).
+- Headline row: Left-anchored label "Global News:" in a semibold style, followed by a single-line (truncated) headline text area. Headlines are truncated with an ellipsis when long; hovering or title text reveals the full headline.
+- Status row: A compact row containing three pieces of information spaced horizontally:
+  - Temperature: Small box showing either a loading placeholder, an error indicator, or the temperature value in Celsius (e.g., "24°C").
+  - Date & time: A date string (weekday + date) visible on medium+ screens, and a live updating time element that displays hours:minutes:seconds. The time updates every second.
+  - Coordinates: A small, muted text showing lat/lon in a truncated container on medium+ screens; falls back to "Location unknown" when unavailable.
+
+Behavior and interaction:
+- Live updates: The clock updates every second on the client; the date/time are formatted in a stable locale to avoid visual differences between server and client.
+- Data fetches: The headline is fetched from a news feed (with CORS handling), and the weather is fetched when geolocation is available. While either fetch is in progress a subtle loading state is shown; on error, a concise error message is displayed in the relevant place.
+- Geolocation consent: The coordinates and weather appear only if the browser grants location access; otherwise the UI shows a graceful fallback.
+- Accessibility: The headline and time elements use polite live region semantics so updates are announced without interrupting screen reader users.
+
+Usage context and responsive behavior:
+- Full-bleed hero across the top of the main layout on larger viewports; on smaller screens the headline and status stack as necessary. The date may be hidden on very narrow screens to preserve horizontal space.
+
+
+
+profileSection.tsx
+
+Overview:
+A profile card displaying the user's photo, name, short bio, and social buttons (LinkedIn, GitHub) plus a resume link. It is visually balanced: a square image on the left and a bordered information panel on the right containing text and action buttons.
+
+Visual layout and hierarchy:
+- Container: A bordered card with padding and a two-column layout on medium+ screens; stacks on small viewports.
+- Image: A fixed-size, rounded, cropped image on the left; uses object-cover scaling to keep the face framed.
+- Info panel: Right-side vertical stack containing:
+  - Name: Large, bold heading.
+  - Short bio: Small paragraph describing role and focus.
+  - Action row: Buttons for LinkedIn and GitHub (round icons with brand colors) and a prominent Resume button that includes an icon and text.
+
+Behavior and interaction:
+- Buttons: Social icons open external links in a new tab. The Resume button opens a PDF in a new tab. Buttons provide hover backgrounds and transitions for tactile feedback.
+- Accessibility: Each interactive element has an aria-label describing the action. The profile image includes descriptive alt text.
+
+Usage context and responsive behavior:
+- In a central column the card sits above or alongside education. On narrow screens the image sits on top, with text and actions beneath.
+
+
+projectSection.tsx
+
+Overview:
+An interactive project showcase that displays one project at a time; clicking anywhere in the project card cycles to the next project. It provides a title, optional hero image, short description, and a comma-separated list of technologies.
+
+Visual layout and hierarchy:
+- Container: Bordered section that functions as a large, tappable card filling its column.
+- Title: Prominent project title near the top.
+- Image area: If an image is available, a fixed-height image block (cropped) gives a visual preview of the project. The image fills the width and remains visually dominant in the card.
+- Details: A description paragraph and a small line showing tech stack (comma-separated).
+
+Behavior and interaction:
+- Click to advance: The entire card is a button; clicking or tapping advances to the next project in the list. There is no separate control for previous.
+- Lazy loading: Images are marked to load lazily for performance.
+- Empty state: If no projects exist, a compact informational card displays a message indicating no projects are available.
+- Accessibility: The button is keyboard-focusable and labeled; project title and description are readable by screen readers.
+
+Usage context and responsive behavior:
+- Designed for a narrow right column or a central column; scales to available width and presents the project image consistently using object-cover cropping.
+
+
+skillSection.tsx
+
+Overview:
+A vertical list of skill progress bars showing the user's proficiency percentages. Each list item displays a labeled progress bar filled proportionally to the percent value and shows the skill name within the filled area.
+
+Visual layout and hierarchy:
+- Container: Vertical list within a bordered card.
+- Progress items: Each item is a horizontal bar with a dark background and a filled portion indicating the skill percent. The filled portion includes a small label with the skill name.
+
+Behavior and interaction:
+- Passive display: No interactive controls; visual progress bars may animate via CSS transitions when percent changes.
+- Accessibility: Each bar exposes progress semantics via role and aria attributes (aria-valuenow, aria-valuemin, aria-valuemax) so assistive tech can interpret the percent values.
+
+Usage context and responsive behavior:
+- Meant for a left-side narrow column or stacked above other content on small screens. Bars stretch to the container width and maintain consistent heights.
+
+
+themeSection.tsx
+
+Overview:
+A small, centered control area that houses a theme switcher component. The visual footprint is minimal and designed to sit inside a narrow widget column or toolbar.
+
+Visual layout and hierarchy:
+- Container: Centered small box that keeps the switcher visually balanced.
+- Switcher: A compact control (likely an icon or toggle) that lets users switch between color themes (light/dark).
+
+Behavior and interaction:
+- Toggle behavior: Tapping or clicking toggles the site theme and the switcher shows the current state with subtle motion.
+- Accessibility: The control is focusable and keyboard operable with an accessible label.
+
+Usage context and responsive behavior:
+- Placed in a narrow column with other small widgets; remains centered and keeps a consistent minimum size so the control is easy to tap on mobile.
+
+
+End of file.
