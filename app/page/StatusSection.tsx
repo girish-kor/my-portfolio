@@ -33,7 +33,7 @@ export function StatusSection() {
       <div className="flex flex-col flex-1">
         <div className="flex flex-row justify-between gap-2 w-full">
           <h3 className="font-semibold text-lg">{currentStatus.position}</h3>
-          <p className="text-xs text-gray-500">{currentStatus.timeline}</p>
+          <p className="text-[10px] text-gray-500">{currentStatus.timeline}</p>
         </div>
         <p className="text-sm ">{currentStatus.organization}</p>
       </div>
