@@ -4,7 +4,7 @@ export function ProfileSection() {
   return (
     <div className="flex flex-col items-start  h-full justify-between">
       {/* DIVISION 1: Profile Image + Name & Title */}
-      <div className="flex flex-row items-start gap-4 mb-4">
+      <div className="flex flex-row items-end justify-between gap-4 mb-4 w-full">
         {/* Profile Image */}
         <img
           src="/profile.jpeg"
@@ -13,7 +13,7 @@ export function ProfileSection() {
         />
 
         {/* Name & Title */}
-        <div className="flex flex-col justify-start">
+        <div className="flex-1 flex flex-col justify-end items-end text-right">
           <h2 className="text-xl font-bold">Girish Kor</h2>
           <p className="text-gray-600 dark:text-gray-300">Software Developer</p>
         </div>
