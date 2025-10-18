@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 
 export function CountSection() {
   const username = 'girish-kor';
@@ -28,11 +29,15 @@ export function CountSection() {
       {loading && <p>Loading repo count...</p>}
       {error && <p className="text-red-500">{error}</p>}
       {repoCount !== null && (
-        <div className=" flex flex-col">
-          <p className="text-4xl">
-            <strong>{repoCount}</strong>
-          </p>
-          <p>Project Count</p>
+        <div className=" flex flex-col items-center">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <p className="text-4xl cursor-help">
+                <strong>{repoCount}</strong>
+              </p>
+            </TooltipTrigger>
+            <TooltipContent sideOffset={4}>Total public repositories on GitHub</TooltipContent>
+          </Tooltip>
         </div>
       )}
     </div>

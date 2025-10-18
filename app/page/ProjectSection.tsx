@@ -7,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select';
+import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 
 interface Project {
   title: string;
@@ -126,15 +127,23 @@ export function ProjectSection() {
 
         {/* links */}
         <div className="flex justify-between mt-2">
-          <a
-            href={selectedProject.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blackhover:underline flex items-center gap-2"
-            aria-label={`GitHub repository for ${selectedProject.title}`}
-          >
-            <p>REPO</p> <FaExternalLinkSquareAlt className="w-5 h-5" aria-hidden="true" />
-          </a>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <a
+                href={selectedProject.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blackhover:underline flex items-center gap-0 "
+                aria-label={`GitHub repository for ${selectedProject.title}`}
+              >
+                <p className="flex items-center bg-black text-white text-bold dark:bg-white dark:text-black pl-2 font-bold  rounded">
+                  REPO
+                  <FaExternalLinkSquareAlt className="ml-1 w-6 h-6" aria-hidden="true" />
+                </p>
+              </a>
+            </TooltipTrigger>
+            <TooltipContent sideOffset={4}>{selectedProject.githubUrl}</TooltipContent>
+          </Tooltip>
           <a
             href={selectedProject.demoUrl}
             target="_blank"
@@ -142,8 +151,14 @@ export function ProjectSection() {
             className="text-gray-500 hover:underline flex items-center gap-2"
             aria-label={`Live demo for ${selectedProject.title}`}
           >
-            <p>URL</p>
-            <FaLink className="w-5 h-5" aria-hidden="true" />
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span>
+                  <FaLink className="w-5 h-5" aria-hidden="true" />
+                </span>
+              </TooltipTrigger>
+              <TooltipContent sideOffset={4}>{selectedProject.demoUrl}</TooltipContent>
+            </Tooltip>
           </a>
         </div>
       </div>

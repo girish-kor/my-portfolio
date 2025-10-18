@@ -1,4 +1,5 @@
 import { FaFileAlt, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 
 export function ProfileSection() {
   return (
@@ -37,7 +38,14 @@ export function ProfileSection() {
               rel="noopener noreferrer"
               className="text-gray-800 dark:text-gray-100 hover:text-blue-500"
             >
-              <FaGithub size={27} />
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span>
+                    <FaGithub size={27} />
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent sideOffset={4}>GitHub</TooltipContent>
+              </Tooltip>
             </a>
 
             {/* LinkedIn */}
@@ -47,7 +55,14 @@ export function ProfileSection() {
               rel="noopener noreferrer"
               className="text-gray-800 dark:text-gray-100 hover:text-blue-700"
             >
-              <FaLinkedin size={27} />
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span>
+                    <FaLinkedin size={27} />
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent sideOffset={4}>LinkedIn</TooltipContent>
+              </Tooltip>
             </a>
           </div>
           <div>
@@ -61,7 +76,14 @@ export function ProfileSection() {
               <span className="border-2 border-black dark:border-white pl-2 border-r-0">
                 RESUME
               </span>
-              <FaFileAlt size={27} className="" />
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span>
+                    <FaFileAlt size={27} className="" />
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent sideOffset={4}>Download PDF</TooltipContent>
+              </Tooltip>
             </a>
           </div>
         </div>
