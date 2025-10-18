@@ -11,7 +11,7 @@ export function ProfileSection() {
         <img
           src="/profile.jpeg"
           alt="Profile"
-          className="rounded w-50 h-50 object-cover bg-black dark:bg-white "
+          className="rounded w-45 h-45 object-cover bg-black dark:bg-white "
         />
 
         {/* Name & Title */}
