@@ -1,4 +1,5 @@
 import { FaFileAlt, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { GiPalm } from 'react-icons/gi';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 
 export function ProfileSection() {
@@ -10,11 +11,16 @@ export function ProfileSection() {
         <img
           src="/profile.jpeg"
           alt="Profile"
-          className="rounded w-32 h-32 object-cover bg-black dark:bg-white "
+          className="rounded w-50 h-50 object-cover bg-black dark:bg-white "
         />
 
         {/* Name & Title */}
         <div className="flex-1 flex flex-col justify-end items-end text-right">
+          {/* Waving palm icon above the name */}
+          <GiPalm
+            className="wave text-8xl mb-1 text-gray-800 dark:text-gray-100"
+            aria-hidden="true"
+          />
           <h2 className="text-xl font-bold">Girish Kor</h2>
           <p className="text-gray-600 dark:text-gray-300">Software Developer</p>
         </div>

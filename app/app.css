@@ -143,3 +143,34 @@ body {
 *::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
+
+/* subtle wave animation for the palm icon */
+.wave {
+  display: inline-block;
+  transform-origin: 50% 75%;
+  animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(14deg);
+  }
+  30% {
+    transform: rotate(-8deg);
+  }
+  45% {
+    transform: rotate(14deg);
+  }
+  60% {
+    transform: rotate(-4deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
