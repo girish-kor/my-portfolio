@@ -1,4 +1,11 @@
 import { useEffect, useState } from 'react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '~/components/ui/select';
 
 interface Project {
   title: string;
@@ -68,21 +75,22 @@ export function ProjectSection() {
         <h3 className="text-lg font-semibold">Projects</h3>
 
         <div>
-          <label htmlFor="project-select" className="sr-only">
-            Select project
-          </label>
-          <select
-            id="project-select"
-            value={selectedProjectIndex}
-            onChange={(e) => setSelectedProjectIndex(Number(e.target.value))}
-            className="px-3 py-1 rounded bg-gray-100 dark:bg-gray-800 text-sm border border-gray-200 dark:border-gray-700"
+          <Select
+            value={String(selectedProjectIndex)}
+            onValueChange={(value) => setSelectedProjectIndex(Number(value))}
           >
-            {projects.map((project, index) => (
-              <option key={index} value={index}>
-                {project.title}
-              </option>
-            ))}
-          </select>
+            <SelectTrigger size="default">
+              <SelectValue placeholder="Select project" />
+            </SelectTrigger>
+
+            <SelectContent>
+              {projects.map((project, index) => (
+                <SelectItem key={index} value={String(index)} title={project.title}>
+                  {project.title}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
