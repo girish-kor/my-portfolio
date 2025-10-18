@@ -31,9 +31,11 @@ export function StatusSection() {
   return (
     <div className="flex items-center justify-between   w-full ">
       {/* Current education info */}
-      <div className="flex flex-col flex-1">
-        <h3 className="font-semibold text-lg">{currentStatus.position}</h3>
-        <div className="flex flex-row justify-between gap-2 w-full">
+      <div className="flex flex-col justify-between flex-1 h-20 ">
+        <div>
+          <h3 className="font-semibold text-lg">{currentStatus.position}</h3>
+        </div>
+        <div className="flex flex-row justify-between gap-2 w-full items-baseline ">
           <p className="text-sm ">{currentStatus.organization}</p>
           <p className="text-[10px] text-gray-500">{currentStatus.timeline}</p>
         </div>
