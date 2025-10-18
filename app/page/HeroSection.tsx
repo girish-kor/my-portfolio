@@ -122,7 +122,6 @@ export function HeroSection() {
   const dateStr = new Intl.DateTimeFormat(locale, {
     month: 'short',
     day: 'numeric',
-    year: 'numeric',
   }).format(now);
   const timeStr = new Intl.DateTimeFormat(locale, {
     hour: '2-digit',
