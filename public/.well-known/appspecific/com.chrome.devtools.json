@@ -1,0 +1,7 @@
+{
+  "package": "devtools",
+  "kind": "frontend",
+  "name": "My Portfolio DevTools Integration",
+  "description": "A placeholder file to satisfy Chrome DevTools app-specific request during local development.",
+  "version": "1.0.0"
+}
