@@ -35,7 +35,7 @@ export function StatusSection() {
         <div>
           <h3 className="text-lg">{currentStatus.position}</h3>
         </div>
-        <div className="flex flex-row justify-between gap-2 w-full items-baseline ">
+        <div className="flex flex-row justify-between gap-2 w-full items-baseline opacity-80 ">
           <p className="text-sm">{currentStatus.organization}</p>
           <p className="text-sm">{currentStatus.timeline}</p>
         </div>
