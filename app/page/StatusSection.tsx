@@ -10,8 +10,8 @@ export function StatusSection() {
       timeline: 'JUN 25 - SEP 25',
     },
     {
-      position: 'B.E. in Computer Science',
-      organization: 'Mumbai University',
+      position: 'B.E. in Computer Science Engineering',
+      organization: 'University of Mumbai',
       timeline: 2024,
     },
   ];
