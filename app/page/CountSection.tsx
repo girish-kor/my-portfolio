@@ -26,7 +26,7 @@ export function CountSection() {
 
   return (
     <div className="text-center text-lg font-medium text-gray-700 dark:text-gray-300">
-      {loading && <p>Loading repo count...</p>}
+      {loading && <p>Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
       {repoCount !== null && (
         <div className=" flex flex-col items-center">
