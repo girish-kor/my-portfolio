@@ -1,3 +1,4 @@
+import { Cursor } from '~/components/cursor';
 import { ThemeSwitch } from '~/components/theme-switch';
 import { BorderBox } from '../components/ui/border-box';
 import { CountSection } from './CountSection';
@@ -9,7 +10,8 @@ import { StatusSection } from './StatusSection';
 
 export function Layout() {
   return (
-    <main className="flex flex-col justify-center items-center min-h-screen bg-white dark:bg-black">
+    <main className="flex flex-col justify-center items-center min-h-screen bg-white dark:bg-black cursor-none">
+      <Cursor />
       <div className="grid gap-6 p-6 w-full max-w-7xl">
         {/* Division 1 */}
         <div className="grid grid-cols-5 gap-6">

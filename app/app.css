@@ -202,6 +202,22 @@ body {
   display: none; /* Safari and Chrome */
 }
 
+/* Hide the native OS cursor so only our custom website cursor is visible.
+   Keep text-editable controls functional by allowing the text caret on inputs. */
+html,
+body,
+body * {
+  cursor: none !important;
+}
+
+/* Exceptions: allow text caret in editable controls */
+input,
+textarea,
+select,
+[contenteditable='true'] {
+  cursor: text !important;
+}
+
 /* Animation for rotating the SVG 'gun' back and forth */
 @keyframes gun-rotate {
   0% {
