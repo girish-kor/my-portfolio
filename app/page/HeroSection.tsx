@@ -92,12 +92,9 @@ export function HeroSection() {
     let cancelled = false;
     const fetchCity = async () => {
       try {
-        // Use raw endpoint for cleaner response
-        const proxy = 'https://api.allorigins.win/raw?url=';
+        // Fetch directly from Nominatim (no User-Agent header from browser)
         const nomUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords.lat}&lon=${coords.lon}`;
-        const res = await fetch(proxy + encodeURIComponent(nomUrl), {
-          headers: { 'User-Agent': 'HeroSectionApp/1.0' },
-        });
+        const res = await fetch(nomUrl);
         if (!res.ok) throw new Error();
         const data = await res.json();
         if (cancelled) return;
@@ -118,6 +115,9 @@ export function HeroSection() {
       }
     };
     fetchCity();
+    return () => {
+      cancelled = true;
+    };
   }, [coords]);
 
   // Time & date formatting
