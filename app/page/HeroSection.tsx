@@ -149,7 +149,7 @@ export function HeroSection() {
       <div className="flex items-center">
         <div title={headline ?? undefined} aria-live="polite" aria-atomic="true">
           {headlineLoading && <span className="opacity-60">Loading headline…</span>}
-          {headlineError && <span className="text-rose-400">{headlineError}</span>}
+          {headlineError && <span className="text-rose-600">{headlineError}</span>}
           {!headlineLoading && !headlineError && (headline ?? 'No headline available')}
         </div>
       </div>
@@ -174,7 +174,7 @@ export function HeroSection() {
           <div>
             {weather.status === 'idle' && <span className="opacity-60">Weather unknown</span>}
             {weather.status === 'loading' && <span className="opacity-60">Loading…</span>}
-            {weather.status === 'error' && <span className="text-rose-400">{weather.message}</span>}
+            {weather.status === 'error' && <span className="text-rose-600">{weather.message}</span>}
             {weather.status === 'ready' && <span>{weather.celsius}°C</span>}
           </div>
 

@@ -51,11 +51,12 @@ export function ProfileSection() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-800 dark:text-gray-100 hover:text-blue-500"
+              aria-label="GitHub profile"
             >
               <Tooltip>
                 <TooltipTrigger asChild>
                   <span>
-                    <FaGithub size={27} />
+                    <FaGithub size={27} aria-hidden="true" />
                   </span>
                 </TooltipTrigger>
                 <TooltipContent sideOffset={4}>GitHub</TooltipContent>
@@ -68,11 +69,12 @@ export function ProfileSection() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-800 dark:text-gray-100 hover:text-blue-700"
+              aria-label="LinkedIn profile"
             >
               <Tooltip>
                 <TooltipTrigger asChild>
                   <span>
-                    <FaLinkedin size={27} />
+                    <FaLinkedin size={27} aria-hidden="true" />
                   </span>
                 </TooltipTrigger>
                 <TooltipContent sideOffset={4}>LinkedIn</TooltipContent>
@@ -93,7 +95,7 @@ export function ProfileSection() {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <span>
-                    <FaFileAlt size={27} className="" />
+                    <FaFileAlt size={27} className="" aria-hidden="true" />
                   </span>
                 </TooltipTrigger>
                 <TooltipContent sideOffset={4}>Download PDF</TooltipContent>

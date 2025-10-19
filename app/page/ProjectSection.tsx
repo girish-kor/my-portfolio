@@ -133,10 +133,10 @@ export function ProjectSection() {
                 href={selectedProject.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blackhover:underline flex items-center gap-0 "
+                className="text-black hover:underline flex items-center gap-0"
                 aria-label={`GitHub repository for ${selectedProject.title}`}
               >
-                <p className="flex items-center bg-black text-white text-bold dark:bg-white dark:text-black pl-2 font-bold  rounded">
+                <p className="flex items-center bg-black text-white text-bold dark:bg-white dark:text-black pl-2 font-bold rounded">
                   REPO
                   <FaExternalLinkSquareAlt className="ml-1 w-6 h-6" aria-hidden="true" />
                 </p>
@@ -153,8 +153,8 @@ export function ProjectSection() {
           >
             <Tooltip>
               <TooltipTrigger asChild>
-                <span>
-                  <FaLink className="w-5 h-5" aria-hidden="true" />
+                <span aria-hidden="true">
+                  <FaLink className="w-5 h-5" />
                 </span>
               </TooltipTrigger>
               <TooltipContent sideOffset={4}>{selectedProject.demoUrl}</TooltipContent>
