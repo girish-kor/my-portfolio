@@ -44,7 +44,7 @@ export function ProfileSection() {
             />
           </svg>
           <h2 className="text-2xl font-bold">Girish Kor</h2>
-          <p className="text-sm">Software Developer</p>
+          <p className="text-xs">Software Developer</p>
         </div>
       </div>
       {/* DIVISION 2: Description & Social Links */}
