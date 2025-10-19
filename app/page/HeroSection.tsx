@@ -7,7 +7,9 @@ type WeatherState =
   | { status: 'ready'; celsius: number };
 
 export function HeroSection() {
-  const [now, setNow] = useState<Date>(new Date());
+  // Render time only on the client to avoid SSR/CSR hydration mismatches.
+  const [now, setNow] = useState<Date | null>(null);
+  const [mounted, setMounted] = useState(false);
   const [headline, setHeadline] = useState<string | null>(null);
   const [headlineLoading, setHeadlineLoading] = useState(false);
   const [headlineError, setHeadlineError] = useState<string | null>(null);
@@ -17,6 +19,9 @@ export function HeroSection() {
 
   // Clock
   useEffect(() => {
+    // Mark mounted and initialize clock on the client only.
+    setMounted(true);
+    setNow(new Date());
     const timer = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
@@ -102,9 +107,12 @@ export function HeroSection() {
     if (!coords) return;
     const fetchCity = async () => {
       try {
-        const res = await fetch(
-          `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords.lat}&lon=${coords.lon}`
-        );
+        // Nominatim doesn't always send CORS headers and may block direct browser requests.
+        // Use AllOrigins as a lightweight proxy for development. For production, proxy via
+        // your server or a proper proxy to respect Nominatim's usage policy.
+        const proxy = 'https://api.allorigins.win/raw?url=';
+        const nomUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords.lat}&lon=${coords.lon}`;
+        const res = await fetch(proxy + encodeURIComponent(nomUrl));
         const data = await res.json();
         setCity(
           data.address?.city || data.address?.town || data.address?.village || 'Unknown location'
@@ -117,17 +125,23 @@ export function HeroSection() {
   }, [coords]);
 
   // Formatting
-  const locale = typeof navigator !== 'undefined' ? navigator.language || 'en-US' : 'en-US';
-  const weekday = new Intl.DateTimeFormat(locale, { weekday: 'long' }).format(now);
-  const dateStr = new Intl.DateTimeFormat(locale, {
-    month: 'short',
-    day: 'numeric',
-  }).format(now);
-  const timeStr = new Intl.DateTimeFormat(locale, {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-  }).format(now);
+  // Only format dates/times when running on the client and the clock has been initialized.
+  const locale =
+    mounted && typeof navigator !== 'undefined' ? navigator.language || 'en-US' : 'en-US';
+  const weekday = now ? new Intl.DateTimeFormat(locale, { weekday: 'long' }).format(now) : '';
+  const dateStr = now
+    ? new Intl.DateTimeFormat(locale, {
+        month: 'short',
+        day: 'numeric',
+      }).format(now)
+    : '';
+  const timeStr = now
+    ? new Intl.DateTimeFormat(locale, {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      }).format(now)
+    : '';
 
   return (
     <div className="flex flex-col justify-between h-full w-full gap-4">
@@ -145,16 +159,14 @@ export function HeroSection() {
         {/* Date & Time */}
         <div>
           <time
-            dateTime={now.toISOString()}
+            dateTime={now ? now.toISOString() : undefined}
             aria-live="polite"
             aria-atomic="true"
             className="font-mono"
           >
-            {timeStr}
+            {mounted && now ? timeStr : ''}
           </time>
-          <div className="">
-            {weekday}, {dateStr}
-          </div>
+          <div className="">{mounted && now ? `${weekday}, ${dateStr}` : ''}</div>
         </div>
 
         <div>
