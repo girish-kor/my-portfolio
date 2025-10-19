@@ -2,9 +2,9 @@ import { Layout } from '../page/pageLayout';
 import type { Route } from './+types/home';
 
 export function meta({}: Route.MetaArgs) {
-  const title = 'Girish Kor — Frontend Engineer';
+  const title = 'Girish Kor — Software Engineer';
   const description =
-    'Girish Kor is a frontend engineer building accessible, performant, and delightful web experiences. Explore projects, skills, and contact details.';
+    'Girish Kor is a software engineer building accessible, performant, and delightful app experiences. Explore projects, skills, and contact details.';
   const siteUrl = 'https://girish-kor.dev';
 
   return [
