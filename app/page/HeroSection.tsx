@@ -15,7 +15,7 @@ export function HeroSection() {
   const [headlineError, setHeadlineError] = useState<string | null>(null);
   const [coords, setCoords] = useState<{ lat: number; lon: number } | null>(null);
   const [weather, setWeather] = useState<WeatherState>({ status: 'idle' });
-  const [city, setCity] = useState<string>('Unknown location');
+  const [city, setCity] = useState<string>('');
 
   // Clock
   useEffect(() => {
@@ -115,10 +115,11 @@ export function HeroSection() {
         const res = await fetch(proxy + encodeURIComponent(nomUrl));
         const data = await res.json();
         setCity(
-          data.address?.city || data.address?.town || data.address?.village || 'Unknown location'
+          data.address?.city || data.address?.town || data.address?.village || ''
         );
       } catch {
-        setCity('City lookup failed');
+        // Don't set a visible fallback message; leave city empty so nothing is shown.
+        setCity('');
       }
     };
     fetchCity();
@@ -172,10 +173,9 @@ export function HeroSection() {
         <div>
           {/* Temperature */}
           <div>
-            {weather.status === 'idle' && <span className="opacity-60">Weather unknown</span>}
-            {weather.status === 'loading' && <span className="opacity-60">Loading…</span>}
-            {weather.status === 'error' && <span className="text-rose-600">{weather.message}</span>}
-            {weather.status === 'ready' && <span>{weather.celsius}°C</span>}
+              {weather.status === 'loading' && <span className="opacity-60">Loading…</span>}
+              {weather.status === 'error' && <span className="text-rose-600">{weather.message}</span>}
+              {weather.status === 'ready' && <span>{weather.celsius}°C</span>}
           </div>
 
           {/* City */}
