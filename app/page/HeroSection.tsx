@@ -100,40 +100,65 @@ export function HeroSection() {
     return () => navigator.geolocation.clearWatch(watcher);
   }, []);
 
-  // Weather
+  // Quick IP-based geolocation fallback (approximate) to avoid waiting for user geolocation
+  useEffect(() => {
+    let cancelled = false;
+    const controller = new AbortController();
+    const fetchIpLocation = async () => {
+      try {
+        // ipapi.co provides a quick, public JSON endpoint with lat/lon
+        const res = await fetch('https://ipapi.co/json/', { signal: controller.signal });
+        if (!res.ok) return;
+        const data = await res.json();
+        if (cancelled) return;
+        const lat = Number(data.latitude ?? data.lat);
+        const lon = Number(data.longitude ?? data.lon);
+        if (!Number.isNaN(lat) && !Number.isNaN(lon)) {
+          // only set if we don't already have a more accurate position
+          setCoords((prev) => (prev ? prev : { lat, lon }));
+        }
+      } catch {
+        // ignore IP fallback failures silently
+      }
+    };
+    fetchIpLocation();
+    return () => {
+      cancelled = true;
+      controller.abort();
+    };
+  }, []);
+
+  // Fetch weather and city in parallel as soon as we have coords
   useEffect(() => {
     if (!coords) return;
     let cancelled = false;
-    const fetchWeather = async () => {
-      try {
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&current_weather=true&temperature_unit=celsius`;
-        const res = await fetch(url);
-        if (!res.ok) throw new Error();
-        const data = await res.json();
+    const controller = new AbortController();
+
+    const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&current_weather=true&temperature_unit=celsius`;
+    const nomUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords.lat}&lon=${coords.lon}`;
+
+    setWeather({ status: 'loading' });
+
+    const weatherFetch = fetch(weatherUrl, { signal: controller.signal })
+      .then((r) => {
+        if (!r.ok) throw new Error();
+        return r.json();
+      })
+      .then((data) => {
         const c = data?.current_weather?.temperature;
         if (typeof c !== 'number') throw new Error();
         if (!cancelled) setWeather({ status: 'ready', celsius: Math.round(c) });
-      } catch {
+      })
+      .catch(() => {
         if (!cancelled) setWeather({ status: 'idle' });
-      }
-    };
-    fetchWeather();
-    return () => {
-      cancelled = true;
-    };
-  }, [coords]);
+      });
 
-  // ✅ Fixed City Fetch
-  useEffect(() => {
-    if (!coords) return;
-    let cancelled = false;
-    const fetchCity = async () => {
-      try {
-        // Fetch directly from Nominatim (no User-Agent header from browser)
-        const nomUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords.lat}&lon=${coords.lon}`;
-        const res = await fetch(nomUrl);
-        if (!res.ok) throw new Error();
-        const data = await res.json();
+    const cityFetch = fetch(nomUrl, { signal: controller.signal })
+      .then((r) => {
+        if (!r.ok) throw new Error();
+        return r.json();
+      })
+      .then((data) => {
         if (cancelled) return;
         const addr = data?.address || {};
         const cityName =
@@ -147,13 +172,17 @@ export function HeroSection() {
           (data?.display_name ? String(data.display_name).split(',')[0].trim() : '') ||
           '';
         setCity(cityName);
-      } catch {
+      })
+      .catch(() => {
         if (!cancelled) setCity('');
-      }
-    };
-    fetchCity();
+      });
+
+    // run both concurrently
+    Promise.allSettled([weatherFetch, cityFetch]).catch(() => {});
+
     return () => {
       cancelled = true;
+      controller.abort();
     };
   }, [coords]);
 
@@ -171,6 +200,7 @@ export function HeroSection() {
         second: '2-digit',
       }).format(now)
     : '';
+  const coordsStr = coords ? `${coords.lat.toFixed(2)}, ${coords.lon.toFixed(2)}` : '';
 
   return (
     <div className="flex flex-col justify-between h-full w-full gap-4 ">
@@ -199,7 +229,9 @@ export function HeroSection() {
 
         <div className="text-right">
           <div>{weather.status === 'ready' ? `${weather.celsius}°C` : ''}</div>
-          <div>{city}</div>
+          <div className="text-sm opacity-90">
+            <div>{city ? city : coords ? coordsStr : 'Location ?'}</div>
+          </div>
         </div>
       </div>
     </div>
