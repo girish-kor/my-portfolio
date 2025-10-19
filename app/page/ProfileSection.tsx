@@ -36,9 +36,10 @@ export function ProfileSection() {
       <div>
         <div className="">
           <p className="text-gray-700 dark:text-gray-200 text-justify">
-            Passionate software developer with experience in building scalable web applications.
-            Skilled in React, JavaScript, and modern web technologies, with a strong focus on clean
-            code and user-friendly interfaces.
+            I'm a passionate software developer who loves crafting elegant digital solutions. Beyond
+            code, I explore creativity through painting and photography — capturing colors and
+            moments that inspire my work. Every project I create blends logic with artistry,
+            reflecting a balance between technology and imagination.
           </p>
         </div>
 
