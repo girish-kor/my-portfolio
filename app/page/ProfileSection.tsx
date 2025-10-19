@@ -43,14 +43,14 @@ export function ProfileSection() {
               transform="translate(960,15)"
             />
           </svg>
-          <h2 className="text-2xl font-black">Girish Kor</h2>
-          <p className=" text-sm">Software Developer</p>
+          <h2 className="text-2xl font-bold">Girish Kor</h2>
+          <p className="text-sm font-thin">Software Developer</p>
         </div>
       </div>
       {/* DIVISION 2: Description & Social Links */}
       <div>
         <div>
-          <p className="text-justify">
+          <p className="text-justify opacity-80">
             I'm a passionate software developer who loves crafting elegant digital solutions. Beyond
             code, I explore creativity through painting and photography — capturing colors and
             moments that inspire my work. Every project I create blends logic with artistry,

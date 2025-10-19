@@ -19,11 +19,11 @@ export function SkillsSection() {
         <div key={skill.name}>
           <div className="relative w-full h-6 bg-black/10 dark:bg-white/10  overflow-hidden flex items-center rounded border-black/20 dark:border-white/20 border-1">
             <div
-              className={`flex items-center h-full pl-2  transition-all duration-500 hover:opacity-70
+              className={`flex items-center h-full pl-2  transition-all duration-500 hover:opacity-50  opacity-80
                           ${
                             skill.level > 50
-                              ? 'bg-black/70 text-white dark:bg-white/70 dark:text-black'
-                              : 'bg-black/60 text-white dark:bg-black/60 dark:text-white'
+                              ? 'bg-black text-white dark:bg-white dark:text-black'
+                              : 'bg-black text-white dark:bg-black dark:text-white'
                           }`}
               style={{ width: `${skill.level}%` }}
             >

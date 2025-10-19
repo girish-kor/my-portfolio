@@ -136,7 +136,7 @@ export function HeroSection() {
     : '';
 
   return (
-    <div className="flex flex-col justify-between h-full w-full gap-4 opacity-80">
+    <div className="flex flex-col justify-between h-full w-full gap-4 ">
       {/* Headline */}
       <div className="flex items-center">
         {headline && (
@@ -147,7 +147,7 @@ export function HeroSection() {
       </div>
 
       {/* Status row */}
-      <div className="flex justify-between items-center gap-4">
+      <div className="flex justify-between items-center gap-4 opacity-80">
         <div>
           <time
             dateTime={now ? now.toISOString() : undefined}

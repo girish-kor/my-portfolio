@@ -100,19 +100,19 @@ export function ProjectSection() {
         {/* details */}
         <div className="flex flex-col gap-2">
           <h4>Title: {selectedProject.title}</h4>
-          <p className="text-justify mt-2">Description: {selectedProject.description}</p>
+          <p className="text-justify mt-2 opacity-80">Description: {selectedProject.description}</p>
           <p>Last Updated: {selectedProject.date}</p>
         </div>
 
         {/* tags */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2  ">
           {selectedProject.tags.slice(0, 8).map((tag, idx) => (
-            <span key={idx} className="px-2 py-1 rounded text-sm">
+            <span key={idx} className=" pl-1 pr-1 bg-black/30 dark:bg-white/30 text-sm rounded ">
               {tag}
             </span>
           ))}
           {selectedProject.tags.length > 8 && (
-            <span className="px-2 py-1 rounded text-sm">
+            <span className="px-2 py-1 rounded text-sm ">
               +{selectedProject.tags.length - 8} more
             </span>
           )}
@@ -129,7 +129,7 @@ export function ProjectSection() {
                 className="flex items-center gap-0 no-underline"
                 aria-label={`GitHub repository for ${selectedProject.title}`}
               >
-                <p className="flex items-center pl-2 rounded">
+                <p className="flex items-center pl-2 rounded bg-black dark:bg-white text-white dark:text-black ">
                   REPO
                   <FaExternalLinkSquareAlt className="ml-1 w-6 h-6" aria-hidden="true" />
                 </p>
