@@ -7,46 +7,38 @@ type WeatherState =
   | { status: 'ready'; celsius: number };
 
 export function HeroSection() {
-  // Render time only on the client to avoid SSR/CSR hydration mismatches.
   const [now, setNow] = useState<Date | null>(null);
   const [mounted, setMounted] = useState(false);
   const [headline, setHeadline] = useState<string | null>(null);
-  const [headlineLoading, setHeadlineLoading] = useState(false);
-  const [headlineError, setHeadlineError] = useState<string | null>(null);
   const [coords, setCoords] = useState<{ lat: number; lon: number } | null>(null);
   const [weather, setWeather] = useState<WeatherState>({ status: 'idle' });
   const [city, setCity] = useState<string>('');
 
   // Clock
   useEffect(() => {
-    // Mark mounted and initialize clock on the client only.
     setMounted(true);
     setNow(new Date());
     const timer = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
-  // Fetch headline
+  // Headline
   useEffect(() => {
     let abort = false;
     const fetchHeadline = async () => {
-      setHeadlineLoading(true);
-      setHeadlineError(null);
       try {
         const proxy = 'https://api.allorigins.win/raw?url=';
         const feedUrl = encodeURIComponent(
           'https://rss.nytimes.com/services/xml/rss/nyt/World.xml'
         );
         const res = await fetch(proxy + feedUrl);
-        if (!res.ok) throw new Error(`Network error ${res.status}`);
+        if (!res.ok) throw new Error();
         const text = await res.text();
         const match = text.match(/<item>[\s\S]*?<title>([\s\S]*?)<\/title>/i);
         const firstTitle = match ? match[1].replace(/<[^>]+>/g, '').trim() : null;
         if (!abort) setHeadline(firstTitle);
-      } catch (err: any) {
-        if (!abort) setHeadlineError(err?.message ?? 'Failed to load headline');
-      } finally {
-        if (!abort) setHeadlineLoading(false);
+      } catch {
+        if (!abort) setHeadline(null);
       }
     };
     fetchHeadline();
@@ -57,43 +49,35 @@ export function HeroSection() {
   // Geolocation
   useEffect(() => {
     if (!('geolocation' in navigator)) return;
-    const onError = () => {
-      setCoords(null);
-      if (weather.status === 'idle') setWeather({ status: 'error', message: 'Location denied' });
-    };
-
+    const onError = () => setCoords(null);
     navigator.geolocation.getCurrentPosition(
       (pos) => setCoords({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
       onError,
       { maximumAge: 1000 * 60 * 5 }
     );
-
     const watcher = navigator.geolocation.watchPosition(
       (pos) => setCoords({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
       onError,
       { maximumAge: 1000 * 60 * 5 }
     );
-
     return () => navigator.geolocation.clearWatch(watcher);
   }, []);
 
-  // Fetch weather
+  // Weather
   useEffect(() => {
     if (!coords) return;
     let cancelled = false;
     const fetchWeather = async () => {
-      setWeather({ status: 'loading' });
       try {
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&current_weather=true&temperature_unit=celsius`;
         const res = await fetch(url);
-        if (!res.ok) throw new Error(`Weather network ${res.status}`);
+        if (!res.ok) throw new Error();
         const data = await res.json();
         const c = data?.current_weather?.temperature;
-        if (typeof c !== 'number') throw new Error('No temperature in response');
+        if (typeof c !== 'number') throw new Error();
         if (!cancelled) setWeather({ status: 'ready', celsius: Math.round(c) });
-      } catch (err: any) {
-        if (!cancelled)
-          setWeather({ status: 'error', message: err?.message ?? 'Weather fetch failed' });
+      } catch {
+        if (!cancelled) setWeather({ status: 'idle' });
       }
     };
     fetchWeather();
@@ -102,37 +86,46 @@ export function HeroSection() {
     };
   }, [coords]);
 
-  // Fetch city name using OpenStreetMap
+  // ✅ Fixed City Fetch
   useEffect(() => {
     if (!coords) return;
+    let cancelled = false;
     const fetchCity = async () => {
       try {
-        // Nominatim doesn't always send CORS headers and may block direct browser requests.
-        // Use AllOrigins as a lightweight proxy for development. For production, proxy via
-        // your server or a proper proxy to respect Nominatim's usage policy.
+        // Use raw endpoint for cleaner response
         const proxy = 'https://api.allorigins.win/raw?url=';
         const nomUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords.lat}&lon=${coords.lon}`;
-        const res = await fetch(proxy + encodeURIComponent(nomUrl));
+        const res = await fetch(proxy + encodeURIComponent(nomUrl), {
+          headers: { 'User-Agent': 'HeroSectionApp/1.0' },
+        });
+        if (!res.ok) throw new Error();
         const data = await res.json();
-        setCity(data.address?.city || data.address?.town || data.address?.village || '');
+        if (cancelled) return;
+        const addr = data?.address || {};
+        const cityName =
+          addr.city ||
+          addr.town ||
+          addr.village ||
+          addr.municipality ||
+          addr.hamlet ||
+          addr.county ||
+          addr.state ||
+          (data?.display_name ? String(data.display_name).split(',')[0].trim() : '') ||
+          '';
+        setCity(cityName);
       } catch {
-        // Don't set a visible fallback message; leave city empty so nothing is shown.
-        setCity('');
+        if (!cancelled) setCity('');
       }
     };
     fetchCity();
   }, [coords]);
 
-  // Formatting
-  // Only format dates/times when running on the client and the clock has been initialized.
+  // Time & date formatting
   const locale =
     mounted && typeof navigator !== 'undefined' ? navigator.language || 'en-US' : 'en-US';
   const weekday = now ? new Intl.DateTimeFormat(locale, { weekday: 'long' }).format(now) : '';
   const dateStr = now
-    ? new Intl.DateTimeFormat(locale, {
-        month: 'short',
-        day: 'numeric',
-      }).format(now)
+    ? new Intl.DateTimeFormat(locale, { month: 'short', day: 'numeric' }).format(now)
     : '';
   const timeStr = now
     ? new Intl.DateTimeFormat(locale, {
@@ -146,21 +139,15 @@ export function HeroSection() {
     <div className="flex flex-col justify-between h-full w-full gap-4">
       {/* Headline */}
       <div className="flex items-center">
-        <div
-          title={headline ?? undefined}
-          aria-live="polite"
-          aria-atomic="true"
-          className="text-justify"
-        >
-          {headlineLoading && <span className="opacity-60">Loading headline…</span>}
-          {headlineError && <span className="text-rose-600">{headlineError}</span>}
-          {!headlineLoading && !headlineError && (headline ?? 'No headline available')}
-        </div>
+        {headline && (
+          <div title={headline} aria-live="polite" aria-atomic="true" className="text-justify">
+            {headline}
+          </div>
+        )}
       </div>
 
       {/* Status row */}
       <div className="flex justify-between items-center gap-4">
-        {/* Date & Time */}
         <div>
           <time
             dateTime={now ? now.toISOString() : undefined}
@@ -170,18 +157,11 @@ export function HeroSection() {
           >
             {mounted && now ? timeStr : ''}
           </time>
-          <div className="">{mounted && now ? `${weekday}, ${dateStr}` : ''}</div>
+          <div>{mounted && now ? `${weekday}, ${dateStr}` : ''}</div>
         </div>
 
         <div>
-          {/* Temperature */}
-          <div>
-            {weather.status === 'loading' && <span className="opacity-60">Loading…</span>}
-            {weather.status === 'error' && <span className="text-rose-600">{weather.message}</span>}
-            {weather.status === 'ready' && <span>{weather.celsius}°C</span>}
-          </div>
-
-          {/* City */}
+          <div>{weather.status === 'ready' ? `${weather.celsius}°C` : ''}</div>
           <div>{city}</div>
         </div>
       </div>
