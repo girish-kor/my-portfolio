@@ -1,7 +1,11 @@
-import { FaEnvelope, FaFileAlt, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaEnvelope, FaFileAlt, FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 
 export function ProfileSection() {
+  const phoneNumber = '917798668882'; // Use full international format without '+'
+  const message = "Hello! I'd like to know more about your services.";
+  const encodedMessage = encodeURIComponent(message);
+  const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
   return (
     <div className="flex flex-col items-start  h-full justify-between">
       {/* DIVISION 1: Profile Image + Name & Title */}
@@ -78,6 +82,24 @@ export function ProfileSection() {
                   </span>
                 </TooltipTrigger>
                 <TooltipContent sideOffset={4}>LinkedIn</TooltipContent>
+              </Tooltip>
+            </a>
+
+            {/* WhatsApp */}
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-800 dark:text-gray-100 hover:text-green-600"
+              aria-label="Start WhatsApp chat"
+            >
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span>
+                    <FaWhatsapp size={27} aria-hidden="true" />
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent sideOffset={4}>WhatsApp</TooltipContent>
               </Tooltip>
             </a>
 
