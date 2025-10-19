@@ -114,9 +114,7 @@ export function HeroSection() {
         const nomUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords.lat}&lon=${coords.lon}`;
         const res = await fetch(proxy + encodeURIComponent(nomUrl));
         const data = await res.json();
-        setCity(
-          data.address?.city || data.address?.town || data.address?.village || ''
-        );
+        setCity(data.address?.city || data.address?.town || data.address?.village || '');
       } catch {
         // Don't set a visible fallback message; leave city empty so nothing is shown.
         setCity('');
@@ -148,7 +146,12 @@ export function HeroSection() {
     <div className="flex flex-col justify-between h-full w-full gap-4">
       {/* Headline */}
       <div className="flex items-center">
-        <div title={headline ?? undefined} aria-live="polite" aria-atomic="true">
+        <div
+          title={headline ?? undefined}
+          aria-live="polite"
+          aria-atomic="true"
+          className="text-justify"
+        >
           {headlineLoading && <span className="opacity-60">Loading headline…</span>}
           {headlineError && <span className="text-rose-600">{headlineError}</span>}
           {!headlineLoading && !headlineError && (headline ?? 'No headline available')}
@@ -173,9 +176,9 @@ export function HeroSection() {
         <div>
           {/* Temperature */}
           <div>
-              {weather.status === 'loading' && <span className="opacity-60">Loading…</span>}
-              {weather.status === 'error' && <span className="text-rose-600">{weather.message}</span>}
-              {weather.status === 'ready' && <span>{weather.celsius}°C</span>}
+            {weather.status === 'loading' && <span className="opacity-60">Loading…</span>}
+            {weather.status === 'error' && <span className="text-rose-600">{weather.message}</span>}
+            {weather.status === 'ready' && <span>{weather.celsius}°C</span>}
           </div>
 
           {/* City */}
