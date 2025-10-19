@@ -22,7 +22,7 @@ export function SkillsSection() {
               className={`flex items-center h-full pl-2  transition-all duration-500 hover:opacity-70
                           ${
                             skill.level > 50
-                              ? 'bg-black text-white dark:bg-black dark:text-white'
+                              ? 'bg-black text-white dark:bg-white dark:text-black'
                               : 'bg-black/60 text-white dark:bg-black/60 dark:text-white'
                           }`}
               style={{ width: `${skill.level}%` }}
