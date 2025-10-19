@@ -153,10 +153,11 @@ export function HeroSection() {
             dateTime={now ? now.toISOString() : undefined}
             aria-live="polite"
             aria-atomic="true"
+            className="font-mono text-sm"
           >
             {mounted && now ? timeStr : ''}
           </time>
-          <div>{mounted && now ? `${weekday}, ${dateStr}` : ''}</div>
+          <div className=" text-sm">{mounted && now ? `${weekday}, ${dateStr}` : ''}</div>
         </div>
 
         <div className="text-right">

@@ -119,7 +119,7 @@ export function ProjectSection() {
         </div>
 
         {/* links */}
-        <div className="flex justify-between mt-2">
+        <div className="flex justify-between mt-2  ">
           <Tooltip>
             <TooltipTrigger asChild>
               <a
@@ -129,7 +129,7 @@ export function ProjectSection() {
                 className="flex items-center gap-0 no-underline"
                 aria-label={`GitHub repository for ${selectedProject.title}`}
               >
-                <p className="flex items-center pl-2 rounded bg-black dark:bg-white text-white dark:text-black ">
+                <p className="flex opacity-80 hover:opacity-100 items-center pl-2 rounded bg-black dark:bg-white text-white dark:text-black ">
                   REPO
                   <FaExternalLinkSquareAlt className="ml-1 w-6 h-6" aria-hidden="true" />
                 </p>
@@ -141,7 +141,7 @@ export function ProjectSection() {
             href={selectedProject.demoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:underline flex items-center gap-2"
+            className="hover:underline flex items-center gap-2  opacity-80 hover:opacity-100 "
             aria-label={`Live demo for ${selectedProject.title}`}
           >
             <Tooltip>
