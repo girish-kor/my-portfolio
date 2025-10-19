@@ -24,7 +24,33 @@ export function Layout() {
       return vv && typeof vv.scale === 'number' ? vv.scale : window.devicePixelRatio || 1;
     };
 
+    // Detect phone-sized viewports. Prefer matchMedia for reliability.
+    const isPhoneViewport = () => {
+      if (typeof window === 'undefined') return false;
+      if (window.matchMedia) {
+        try {
+          return window.matchMedia('(max-width: 768px)').matches;
+        } catch (e) {
+          // fallthrough
+        }
+      }
+      // Fallback to visualViewport or innerWidth
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const vv: any = (window as any).visualViewport;
+      const width =
+        vv && typeof vv.width === 'number'
+          ? vv.width
+          : window.innerWidth || document.documentElement.clientWidth || Infinity;
+      return width <= 768;
+    };
+
     const check = () => {
+      // If on a narrow viewport (phone), do not apply the zoom-out transform.
+      if (isPhoneViewport()) {
+        setZoomOut(false);
+        return;
+      }
+
       const scale = getScale();
       setZoomOut(scale === 1);
     };
@@ -49,7 +75,7 @@ export function Layout() {
       style={zoomOut ? { transform: 'scale(0.9)', transformOrigin: 'center' } : undefined}
     >
       <Cursor />
-      <div className="grid gap-6 w-full max-w-7xl mx-auto">
+      <div className="grid gap-6 w-full max-w-7xl mx-auto p-4">
         {/* Division 1 */}
         <div className="grid grid-cols-5 gap-6">
           {/* Division 1 SECTION A */}
