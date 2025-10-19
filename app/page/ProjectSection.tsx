@@ -65,8 +65,7 @@ export function ProjectSection() {
     return () => clearInterval(interval);
   }, [projects]);
 
-  if (projects.length === 0)
-    return <p className="text-black/70 dark:text-white/70">Loading projects...</p>;
+  if (projects.length === 0) return <p>Loading projects...</p>;
 
   const selectedProject = projects[selectedProjectIndex];
 
@@ -74,7 +73,7 @@ export function ProjectSection() {
     <div className="flex flex-col gap-4 h-full w-full">
       {/* Header / selector */}
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold">Projects</h3>
+        <h3 className="text-lg">Projects</h3>
 
         <div>
           <Select
@@ -100,26 +99,20 @@ export function ProjectSection() {
       <div className="flex flex-col justify-between flex-1 min-h-0">
         {/* details */}
         <div className="flex flex-col gap-2">
-          <h4>
-            <strong>Title:</strong> {selectedProject.title}
-          </h4>
-          <p className="text-justify mt-2 text-black/85 dark:text-white/85">
-            <strong>Description:</strong> {selectedProject.description}
-          </p>
-          <p className="text-black/70 dark:text-white/70">
-            <strong>Last Updated:</strong> {selectedProject.date}
-          </p>
+          <h4>Title: {selectedProject.title}</h4>
+          <p className="text-justify mt-2">Description: {selectedProject.description}</p>
+          <p>Last Updated: {selectedProject.date}</p>
         </div>
 
         {/* tags */}
         <div className="flex flex-wrap gap-2">
           {selectedProject.tags.slice(0, 8).map((tag, idx) => (
-            <span key={idx} className="px-2 py-1 bg-black/10 dark:bg-white/10 rounded text-sm">
+            <span key={idx} className="px-2 py-1 rounded text-sm">
               {tag}
             </span>
           ))}
           {selectedProject.tags.length > 8 && (
-            <span className="px-2 py-1 bg-black/10 dark:bg-white/10 rounded text-sm">
+            <span className="px-2 py-1 rounded text-sm">
               +{selectedProject.tags.length - 8} more
             </span>
           )}
@@ -133,10 +126,10 @@ export function ProjectSection() {
                 href={selectedProject.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black flex items-center gap-0 no-underline"
+                className="flex items-center gap-0 no-underline"
                 aria-label={`GitHub repository for ${selectedProject.title}`}
               >
-                <p className="flex items-center bg-black/60 text-white text-bold dark:bg-white/60  dark:text-black pl-2 font-bold rounded">
+                <p className="flex items-center pl-2 rounded">
                   REPO
                   <FaExternalLinkSquareAlt className="ml-1 w-6 h-6" aria-hidden="true" />
                 </p>
@@ -148,7 +141,7 @@ export function ProjectSection() {
             href={selectedProject.demoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-black/60 dark:text-white/60 hover:underline flex items-center gap-2"
+            className="hover:underline flex items-center gap-2"
             aria-label={`Live demo for ${selectedProject.title}`}
           >
             <Tooltip>

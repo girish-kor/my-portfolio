@@ -25,14 +25,14 @@ export function CountSection() {
   }, []);
 
   return (
-    <div className="text-center text-lg font-medium text-black/70 dark:text-white/70">
+    <div className="text-center text-black/70 dark:text-white/70">
       {loading && <p>Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
       {repoCount !== null && (
         <div className=" flex flex-col items-center">
           <Tooltip>
             <TooltipTrigger asChild>
-              <p className="text-4xl cursor-help">
+              <p className="cursor-help text-4xl">
                 <strong>{repoCount}</strong>
               </p>
             </TooltipTrigger>
