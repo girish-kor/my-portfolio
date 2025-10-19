@@ -222,3 +222,12 @@ body {
   transform-box: fill-box;
   display: inline-block;
 }
+
+/* Small helper to indent the first line of a paragraph (used for description text) */
+/* Apply to the element directly (more broadly supported); keep ::first-line as a fallback */
+.first-line-indent {
+  text-indent: 4rem; /* ~20px */
+}
+.first-line-indent::first-line {
+  text-indent: 4rem;
+}

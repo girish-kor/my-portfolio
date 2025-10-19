@@ -101,7 +101,10 @@ export function ProjectSection() {
         <div className="flex flex-col gap-2">
           <h4>Title: {selectedProject.title}</h4>
           <p className="opacity-80 text-sm m-2">{selectedProject.date}</p>
-          <p className="text-justify m-2 opacity-80"> {selectedProject.description}</p>
+          <p className="text-justify m-2 opacity-80 first-line-indent">
+            {' '}
+            {selectedProject.description}
+          </p>
         </div>
 
         {/* tags */}

@@ -50,7 +50,7 @@ export function ProfileSection() {
       {/* DIVISION 2: Description & Social Links */}
       <div>
         <div>
-          <p className="text-justify opacity-80">
+          <p className="text-justify opacity-80 first-line-indent">
             I'm a passionate software developer who loves crafting elegant digital solutions. Beyond
             code, I explore creativity through painting and photography — capturing colors and
             moments that inspire my work. Every project I create blends logic with artistry,
