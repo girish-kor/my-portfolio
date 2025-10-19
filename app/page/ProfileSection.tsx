@@ -3,7 +3,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip
 
 export function ProfileSection() {
   const phoneNumber = '917798668882'; // Use full international format without '+'
-  const message = "Hello! I'd like to know more about your services.";
+  const message = "Hello!";
   const encodedMessage = encodeURIComponent(message);
   const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
   return (
