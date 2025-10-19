@@ -140,7 +140,12 @@ export function HeroSection() {
       {/* Headline */}
       <div className="flex items-center">
         {headline && (
-          <div title={headline} aria-live="polite" aria-atomic="true" className="text-justify">
+          <div
+            title={headline}
+            aria-live="polite"
+            aria-atomic="true"
+            className="text-justify text-black/85 dark:text-white/85"
+          >
             {headline}
           </div>
         )}
@@ -153,16 +158,20 @@ export function HeroSection() {
             dateTime={now ? now.toISOString() : undefined}
             aria-live="polite"
             aria-atomic="true"
-            className="font-mono"
+            className="font-mono text-black/85 dark:text-white/85"
           >
             {mounted && now ? timeStr : ''}
           </time>
-          <div>{mounted && now ? `${weekday}, ${dateStr}` : ''}</div>
+          <div className="text-black/70 dark:text-white/70">
+            {mounted && now ? `${weekday}, ${dateStr}` : ''}
+          </div>
         </div>
 
-        <div>
-          <div>{weather.status === 'ready' ? `${weather.celsius}°C` : ''}</div>
-          <div>{city}</div>
+        <div className="text-right">
+          <div className="text-black/85 dark:text-white/85">
+            {weather.status === 'ready' ? `${weather.celsius}°C` : ''}
+          </div>
+          <div className="text-black/70 dark:text-white/70">{city}</div>
         </div>
       </div>
     </div>

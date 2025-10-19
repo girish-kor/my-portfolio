@@ -34,13 +34,13 @@ export function ProfileSection() {
             />
           </svg>
           <h2 className="lg:text-4xl text-2xl font-bold">Girish Kor</h2>
-          <p className="text-gray-600 dark:text-gray-300 lg:text-lg text-sm">Software Developer</p>
+          <p className="text-black/70 dark:text-white/70 lg:text-lg text-sm">Software Developer</p>
         </div>
       </div>
       {/* DIVISION 2: Description & Social Links */}
       <div>
         <div className="">
-          <p className="text-gray-700 dark:text-gray-200 text-justify">
+          <p className="text-black/75 dark:text-white/75 text-justify">
             I'm a passionate software developer who loves crafting elegant digital solutions. Beyond
             code, I explore creativity through painting and photography — capturing colors and
             moments that inspire my work. Every project I create blends logic with artistry,
@@ -55,7 +55,7 @@ export function ProfileSection() {
               href="https://github.com/girish-kor"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-800 dark:text-gray-100 hover:text-blue-500"
+              className="text-black/85 dark:text-white/85 hover:text-blue-500"
               aria-label="GitHub profile"
             >
               <Tooltip>
@@ -73,7 +73,7 @@ export function ProfileSection() {
               href="https://www.linkedin.com/in/girish-kor-52078a349"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-800 dark:text-gray-100 hover:text-blue-700"
+              className="text-black/85 dark:text-white/85 hover:text-blue-700"
               aria-label="LinkedIn profile"
             >
               <Tooltip>
@@ -91,7 +91,7 @@ export function ProfileSection() {
               href="https://pin.it/7ATIkntA2"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-800 dark:text-gray-100 hover:text-pink-600"
+              className="text-black/85 dark:text-white/85 hover:text-pink-600"
               aria-label="Pinterest profile"
             >
               <Tooltip>
@@ -109,7 +109,7 @@ export function ProfileSection() {
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-800 dark:text-gray-100 hover:text-green-600"
+              className="text-black/85 dark:text-white/85 hover:text-green-600"
               aria-label="Start WhatsApp chat"
             >
               <Tooltip>
@@ -127,7 +127,7 @@ export function ProfileSection() {
               href="mailto:girishkor5@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-800 dark:text-gray-100 hover:text-red-500"
+              className="text-black/85 dark:text-white/85 hover:text-red-500"
               aria-label="Send email"
             >
               <Tooltip>

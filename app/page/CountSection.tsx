@@ -25,7 +25,7 @@ export function CountSection() {
   }, []);
 
   return (
-    <div className="text-center text-lg font-medium text-gray-700 dark:text-gray-300">
+    <div className="text-center text-lg font-medium text-black/70 dark:text-white/70">
       {loading && <p>Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
       {repoCount !== null && (
