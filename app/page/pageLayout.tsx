@@ -64,7 +64,7 @@ export function Layout() {
       }`}
     >
       <Cursor />
-      <div className="grid gap-6 w-full max-w-7xl mx-auto p-4">
+      <div className="grid gap-6 w-full max-w-7xl mx-auto py-6 px-4">
         <div className="grid grid-cols-5 gap-6">
           <BorderBox className="col-span-4">
             <HeroSection />
