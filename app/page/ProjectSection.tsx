@@ -133,10 +133,10 @@ export function ProjectSection() {
                 href={selectedProject.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black hover:underline flex items-center gap-0"
+                className="text-black flex items-center gap-0 no-underline"
                 aria-label={`GitHub repository for ${selectedProject.title}`}
               >
-                <p className="flex items-center bg-black text-white text-bold dark:bg-white dark:text-black pl-2 font-bold rounded">
+                <p className="flex items-center bg-black/60 text-white text-bold dark:bg-white/60  dark:text-black pl-2 font-bold rounded">
                   REPO
                   <FaExternalLinkSquareAlt className="ml-1 w-6 h-6" aria-hidden="true" />
                 </p>

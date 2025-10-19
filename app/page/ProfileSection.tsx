@@ -11,12 +11,22 @@ export function ProfileSection() {
     <div className="flex flex-col items-start  h-full justify-between">
       {/* DIVISION 1: Profile Image + Name & Title */}
       <div className="flex flex-row items-end justify-between gap-4 mb-4 w-full">
-        {/* Profile Image */}
-        <img
-          src="/Profile.png"
-          alt="Profile"
-          className="rounded w-45 h-45 object-cover bg-black dark:bg-white "
-        />
+        {/* Profile Image: light/dark variants — switch with Tailwind 'dark' class (site theme), not OS preference */}
+        <div className="relative">
+          {/* Light theme image (visible when NOT dark) */}
+          <img
+            src="/ProfileLight.png"
+            alt="Profile"
+            className="rounded w-45 h-45 object-cover bg-black block dark:hidden"
+          />
+
+          {/* Dark theme image (visible only in dark) */}
+          <img
+            src="/ProfileDark.png"
+            alt="Profile (dark)"
+            className="rounded w-45 h-45 object-cover bg-black hidden dark:block"
+          />
+        </div>
 
         {/* Name & Title */}
         <div className="flex-1 flex flex-col justify-end items-end text-right">
