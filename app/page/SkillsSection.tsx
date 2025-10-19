@@ -17,7 +17,7 @@ export function SkillsSection() {
     <div className=" grid grid-cols-2 lg:grid-cols-1 gap-2">
       {skills.map((skill) => (
         <div key={skill.name}>
-          <div className="relative w-full h-6 bg-black/10 dark:bg-white/10  overflow-hidden flex items-center rounded border-black/20 dark:border-white/20 border-1">
+          <div className="relative w-full h-6 bg-black/10 dark:bg-white/10  overflow-hidden flex items-center rounded border-black/80 dark:border-white/80 border-1">
             <div
               className={`flex items-center h-full pl-2  transition-all duration-500 hover:opacity-50  opacity-80 text-sm
                           ${
