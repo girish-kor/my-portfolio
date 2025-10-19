@@ -24,26 +24,63 @@ export function HeroSection() {
 
   // Headline
   useEffect(() => {
-    let abort = false;
-    const fetchHeadline = async () => {
+    let alive = true;
+    const controller = new AbortController();
+
+    const parseTitleFromXml = (xmlText: string): string | null => {
       try {
-        const proxy = 'https://api.allorigins.win/raw?url=';
-        const feedUrl = encodeURIComponent(
-          'https://rss.nytimes.com/services/xml/rss/nyt/World.xml'
-        );
-        const res = await fetch(proxy + feedUrl);
-        if (!res.ok) throw new Error();
-        const text = await res.text();
-        const match = text.match(/<item>[\s\S]*?<title>([\s\S]*?)<\/title>/i);
-        const firstTitle = match ? match[1].replace(/<[^>]+>/g, '').trim() : null;
-        if (!abort) setHeadline(firstTitle);
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(xmlText, 'application/xml');
+        // Try RSS <item><title>
+        const item = doc.querySelector('item');
+        if (item) {
+          const t = item.querySelector('title')?.textContent;
+          if (t) return t.trim();
+        }
+        // Try Atom <entry><title>
+        const entryTitle = doc.querySelector('entry > title')?.textContent;
+        if (entryTitle) return entryTitle.trim();
+        // Fallback to channel title
+        const channelTitle = doc.querySelector('channel > title')?.textContent;
+        return channelTitle ? channelTitle.trim() : null;
       } catch {
-        if (!abort) setHeadline(null);
+        return null;
       }
     };
+
+    const fetchHeadline = async () => {
+      const feedUrl = 'https://rss.nytimes.com/services/xml/rss/nyt/World.xml';
+      // Try direct fetch first (some proxies are blocked on mobile); fall back to AllOrigins
+      const candidates = [
+        feedUrl,
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(feedUrl)}`,
+      ];
+
+      for (const url of candidates) {
+        try {
+          const res = await fetch(url, { signal: controller.signal });
+          if (!res.ok) throw new Error('bad response');
+          const text = await res.text();
+          const firstTitle = parseTitleFromXml(text);
+          if (!alive) return;
+          setHeadline(firstTitle);
+          return;
+        } catch (e) {
+          if (controller.signal.aborted) return;
+          // try next candidate
+        }
+      }
+
+      if (alive) setHeadline(null);
+    };
+
     fetchHeadline();
     const id = setInterval(fetchHeadline, 1000 * 60 * 5);
-    return () => clearInterval(id);
+    return () => {
+      alive = false;
+      controller.abort();
+      clearInterval(id);
+    };
   }, []);
 
   // Geolocation
