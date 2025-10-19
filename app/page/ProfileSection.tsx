@@ -1,4 +1,4 @@
-import { FaFileAlt, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaEnvelope, FaFileAlt, FaGithub, FaLinkedin } from 'react-icons/fa';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 
 export function ProfileSection() {
@@ -78,6 +78,24 @@ export function ProfileSection() {
                   </span>
                 </TooltipTrigger>
                 <TooltipContent sideOffset={4}>LinkedIn</TooltipContent>
+              </Tooltip>
+            </a>
+
+            {/* Email */}
+            <a
+              href="mailto:girishkor5@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-800 dark:text-gray-100 hover:text-red-500"
+              aria-label="Send email"
+            >
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span>
+                    <FaEnvelope size={27} aria-hidden="true" />
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent sideOffset={4}>girishkor5@gmail.com</TooltipContent>
               </Tooltip>
             </a>
           </div>
