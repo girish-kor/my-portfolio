@@ -13,7 +13,7 @@ export function ProfileSection() {
       <div className="flex flex-row items-end justify-between gap-4 mb-4 w-full">
         {/* Profile Image */}
         <img
-          src="/profile.jpeg"
+          src="/Profile.png"
           alt="Profile"
           className="rounded w-45 h-45 object-cover bg-black dark:bg-white "
         />
