@@ -1,9 +1,10 @@
-import { FaEnvelope, FaFileAlt, FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
+import { FaEnvelope, FaFileAlt, FaGithub, FaLinkedin, FaPinterest } from 'react-icons/fa';
+import { IoLogoWhatsapp } from 'react-icons/io';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 
 export function ProfileSection() {
   const phoneNumber = '917798668882'; // Use full international format without '+'
-  const message = "Hello!";
+  const message = 'Hello!';
   const encodedMessage = encodeURIComponent(message);
   const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
   return (
@@ -85,6 +86,24 @@ export function ProfileSection() {
               </Tooltip>
             </a>
 
+            {/* Pinterest */}
+            <a
+              href="https://pin.it/7ATIkntA2"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-800 dark:text-gray-100 hover:text-pink-600"
+              aria-label="Pinterest profile"
+            >
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span>
+                    <FaPinterest size={27} aria-hidden="true" />
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent sideOffset={4}>Pinterest</TooltipContent>
+              </Tooltip>
+            </a>
+
             {/* WhatsApp */}
             <a
               href={whatsappLink}
@@ -96,7 +115,7 @@ export function ProfileSection() {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <span>
-                    <FaWhatsapp size={27} aria-hidden="true" />
+                    <IoLogoWhatsapp size={27} aria-hidden="true" />
                   </span>
                 </TooltipTrigger>
                 <TooltipContent sideOffset={4}>WhatsApp</TooltipContent>
