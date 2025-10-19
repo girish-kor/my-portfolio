@@ -17,7 +17,7 @@ export function BorderBox({
   style,
   rounded = 'md',
   shadow = 'sm',
-  borderColor = 'border-gray-300',
+  borderColor = 'border-black/40 dark:border-white/40',
   padding = 'md',
   hoverShadow = false,
 }: Props) {
