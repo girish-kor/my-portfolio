@@ -4,6 +4,7 @@ export function SkillsSection() {
     { name: 'SpringBoot', level: 85 },
     { name: 'MongoDB', level: 80 },
     { name: 'SQL', level: 75 },
+    { name: 'Figma (UI/UX)', level: 78 },
     { name: 'React', level: 90 },
     { name: 'Next.js', level: 85 },
     { name: 'TypeScript', level: 80 },
