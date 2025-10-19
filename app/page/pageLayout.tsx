@@ -59,7 +59,7 @@ export function Layout() {
 
   return (
     <main
-      className={`flex flex-col justify-center items-center min-h-screen bg-white dark:bg-black cursor-none transition-transform duration-300 ${
+      className={`flex flex-col justify-center items-center min-h-screen cursor-none transition-transform duration-300 ${
         zoomOut ? 'scale-90 origin-center' : ''
       }`}
     >
