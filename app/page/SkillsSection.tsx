@@ -17,13 +17,13 @@ export function SkillsSection() {
     <div className="font-sans grid grid-cols-2 lg:grid-cols-1 gap-2">
       {skills.map((skill) => (
         <div key={skill.name}>
-          <div className="relative w-full h-6 bg-gray-200 dark:bg-black rounded overflow-hidden flex items-center text-xs font-semibold border-black dark:border-white border-1">
+          <div className="relative w-full h-6 bg-black/10 dark:bg-black  overflow-hidden flex items-center text-xs font-semibold rounded border-black dark:border-white border-1">
             <div
-              className={`flex items-center h-full pl-2 rounded transition-all duration-500 hover:opacity-70
+              className={`flex items-center h-full pl-2  transition-all duration-500 hover:opacity-70
                           ${
                             skill.level > 50
-                              ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-black'
-                              : 'bg-blue-500 text-white dark:bg-blue-400 dark:text-black'
+                              ? 'bg-black text-white dark:bg-black dark:text-white'
+                              : 'bg-black/60 text-white dark:bg-black/60 dark:text-white'
                           }`}
               style={{ width: `${skill.level}%` }}
             >
