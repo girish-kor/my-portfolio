@@ -151,7 +151,7 @@ export function ProfileSection() {
             </a>
           </div>
           <div>
-            {/* Resume */}
+            {/* https://docs.google.com/document/d/1OAvMn9T3zoPWrhKsOoVM3b2RklSIM4F6qVDhyZsdH38/edit?usp=sharing */}
             <a
               href="/Resume.pdf"
               target="_blank"
