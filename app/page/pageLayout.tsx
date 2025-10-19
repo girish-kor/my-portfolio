@@ -13,7 +13,7 @@ export function Layout() {
       <div className="grid gap-6 p-6 w-full max-w-7xl">
         {/* Division 1 */}
         <div className="grid grid-cols-5 gap-6">
-          <ThemeSwitch className="fixed top-0 right-0 " />
+          <ThemeSwitch className="fixed top-4 right-0 rotate-90" />
           {/* Division 1 SECTION A */}
           <BorderBox className="col-span-4">
             <HeroSection />
