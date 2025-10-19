@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Cursor } from '~/components/cursor';
 import { BorderBox } from '../components/ui/border-box';
 import { CountSection } from './CountSection';
@@ -8,10 +9,47 @@ import { SkillsSection } from './SkillsSection';
 import { StatusSection } from './StatusSection';
 
 export function Layout() {
+  const [zoomOut, setZoomOut] = useState(false);
+
+  useEffect(() => {
+    // Determine the current page scale. Prefer visualViewport.scale when available.
+    const getScale = () => {
+      if (typeof window === 'undefined') return 1;
+      // visualViewport.scale exists in modern browsers and reflects zoom; fallback to devicePixelRatio
+      // when visualViewport isn't available.
+      // Treat a scale of exactly 1 as "100%" and apply 90% visual zoom.
+      // Note: devicePixelRatio is not a perfect proxy but works for common cases.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const vv: any = (window as any).visualViewport;
+      return vv && typeof vv.scale === 'number' ? vv.scale : window.devicePixelRatio || 1;
+    };
+
+    const check = () => {
+      const scale = getScale();
+      setZoomOut(scale === 1);
+    };
+
+    check();
+    window.addEventListener('resize', check);
+    if ((window as any).visualViewport) {
+      (window as any).visualViewport.addEventListener('resize', check);
+    }
+    return () => {
+      window.removeEventListener('resize', check);
+      if ((window as any).visualViewport) {
+        (window as any).visualViewport.removeEventListener('resize', check);
+      }
+    };
+  }, []);
+
   return (
-    <main className="flex flex-col justify-center items-center min-h-screen bg-white dark:bg-black cursor-none">
+    // When zooming out apply a visual scale; transformOrigin keeps the layout centered.
+    <main
+      className="flex flex-col justify-center items-center min-h-screen bg-white dark:bg-black cursor-none"
+      style={zoomOut ? { transform: 'scale(0.9)', transformOrigin: 'center' } : undefined}
+    >
       <Cursor />
-      <div className="grid gap-6 p-6 w-full max-w-7xl">
+      <div className="grid gap-6 w-full max-w-7xl mx-auto">
         {/* Division 1 */}
         <div className="grid grid-cols-5 gap-6">
           {/* Division 1 SECTION A */}
