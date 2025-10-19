@@ -153,7 +153,7 @@ export function HeroSection() {
             dateTime={now ? now.toISOString() : undefined}
             aria-live="polite"
             aria-atomic="true"
-            className="font-mono text-sm"
+            className="text-xs"
           >
             {mounted && now ? timeStr : ''}
           </time>

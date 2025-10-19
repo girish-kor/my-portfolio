@@ -19,7 +19,7 @@ export function SkillsSection() {
         <div key={skill.name}>
           <div className="relative w-full h-6 bg-black/10 dark:bg-white/10  overflow-hidden flex items-center rounded border-black/20 dark:border-white/20 border-1">
             <div
-              className={`flex items-center h-full pl-2  transition-all duration-500 hover:opacity-50  opacity-80
+              className={`flex items-center h-full pl-2  transition-all duration-500 hover:opacity-50  opacity-80 text-sm
                           ${
                             skill.level > 50
                               ? 'bg-black text-white dark:bg-white dark:text-black'

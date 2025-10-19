@@ -44,7 +44,7 @@ export function ProfileSection() {
             />
           </svg>
           <h2 className="text-2xl font-bold">Girish Kor</h2>
-          <p className="text-xs">Software Developer</p>
+          <p className="text-xs font-bold opacity-90">Software Developer</p>
         </div>
       </div>
       {/* DIVISION 2: Description & Social Links */}
@@ -158,7 +158,7 @@ export function ProfileSection() {
               rel="noopener noreferrer"
               className="flex items-center hover:opacity-80"
             >
-              <span className="border-2 border-black dark:border-white pl-2 border-r-0">
+              <span className="border-2 font-bold border-black dark:border-white pl-2 border-r-0">
                 RESUME
               </span>
               <Tooltip>
