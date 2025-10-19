@@ -1,8 +1,15 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-/* Embed Tomorrow font only. All other local font-family declarations removed.
-   Files live under public/fonts/*. The font-family name is "Tomorrow". */
+/* Additional weights for the Tomorrow family */
+@font-face {
+  font-family: 'Tomorrow';
+  src: url('/fonts/Tomorrow-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
 @font-face {
   font-family: 'Tomorrow';
   src: url('/fonts/Tomorrow.ttf') format('truetype');
@@ -10,10 +17,27 @@
   font-style: normal;
   font-display: swap;
 }
+
+@font-face {
+  font-family: 'Tomorrow';
+  src: url('/fonts/Tomorrow-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 @font-face {
   font-family: 'Tomorrow';
   src: url('/fonts/Tomorrow-Bold.ttf') format('truetype');
   font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tomorrow';
+  src: url('/fonts/Tomorrow-Black.ttf') format('truetype');
+  font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
@@ -80,7 +104,6 @@ body {
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
-
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
