@@ -33,8 +33,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
 
         {/* Site-wide favicons / SEO defaults - route-level <Meta /> may add/override specific tags */}
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/ProfileLight.png" />
+        <link rel="icon" href="/icon/favicon.ico" />
+        <link rel="apple-touch-icon" href="/icon/apple-touch-icon.png" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <meta name="robots" content="index,follow" />
         <meta name="theme-color" content="#0f172a" />
