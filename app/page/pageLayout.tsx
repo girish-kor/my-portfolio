@@ -10,7 +10,7 @@ import { StatusSection } from './StatusSection';
 
 export function Layout() {
   return (
-    <main className="flex flex-col justify-center items-center min-h-screen cursor-none transition-transform duration-300">
+    <main className="flex flex-col justify-center items-center min-h-screen cursor-none transition-transform duration-300 text-black dark:text-white">
       <Cursor />
       <div className="grid gap-6 w-full max-w-7xl mx-auto py-6 px-4">
         <div className="grid grid-cols-5 gap-6">

@@ -19,7 +19,7 @@ export const metadata: MetaDescriptor[] = [
       'Girish Kor, software engineer, fullstack, React, TypeScript, Java, Spring Boot, portfolio, web developer',
   },
   { name: 'robots', content: 'index, follow' },
-  { name: 'theme-color', content: '#0f172a' },
+  { name: 'theme-color', content: '#000000' },
 
   // Canonical
   { rel: 'canonical', href: siteUrl },
