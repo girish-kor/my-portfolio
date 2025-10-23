@@ -53,7 +53,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               '@context': 'https://schema.org',
               '@type': 'Person',
               name: 'Girish Kor',
-              url: 'https://girish-kor.dev/',
+              url: 'https://www.girishkor.dev/',
               sameAs: [],
               jobTitle: 'Software Engineer',
               image: 'https://%PUBLIC_URL%/ProfileLight.png',
