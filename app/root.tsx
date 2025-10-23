@@ -1,27 +1,30 @@
 import {
-  isRouteErrorResponse,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  isRouteErrorResponse,
 } from 'react-router';
-
 import type { Route } from './+types/root';
 import './app.css';
+import { assets, metadata, personJsonLd, websiteJsonLd } from './metadata';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-  {
-    rel: 'preconnect',
-    href: 'https://fonts.gstatic.com',
-    crossOrigin: 'anonymous',
-  },
+  { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
   {
     rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
+    href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap',
   },
+  { rel: 'manifest', href: assets.manifest },
+  { rel: 'icon', href: assets.favicon },
+  { rel: 'apple-touch-icon', href: assets.appleTouchIcon },
+  // Optionally add robots as a linked resource
+  { rel: 'robots', href: assets.robots },
 ];
+
+export const metaFunction = () => metadata;
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -32,38 +35,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
 
-        {/* Site-wide favicons / SEO defaults - route-level <Meta /> may add/override specific tags */}
-        <link rel="icon" href="/icon/favicon.ico" />
-        <link rel="apple-touch-icon" href="/icon/apple-touch-icon.png" />
-        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <meta name="robots" content="index,follow" />
-        <meta name="theme-color" content="#0f172a" />
-
-        {/* Open Graph / Twitter defaults (individual routes can override via Meta descriptors) */}
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Girish Kor" />
-        <meta property="og:image" content="/ProfileLight.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-
-        {/* Structured data (JSON-LD) for a personal portfolio */}
+        {/* Structured Data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Person',
-              name: 'Girish Kor',
-              url: 'https://www.girishkor.dev/',
-              sameAs: [],
-              jobTitle: 'Software Engineer',
-              image: 'https://%PUBLIC_URL%/ProfileLight.png',
-              description:
-                'Portfolio of Girish Kor — software engineer focused on accessible, performant web experiences.',
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
-      <body>
+      <body className="font-inter bg-slate-50 text-slate-900">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -76,29 +58,25 @@ export default function App() {
   return <Outlet />;
 }
 
+// --- Error Boundary ---
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let message = 'Oops!';
   let details = 'An unexpected error occurred.';
-  let stack: string | undefined;
 
   if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? '404' : 'Error';
+    message = error.status === 404 ? '404 - Page Not Found' : 'Error';
     details =
-      error.status === 404 ? 'The requested page could not be found.' : error.statusText || details;
-  } else if (import.meta.env.DEV && error && error instanceof Error) {
+      error.status === 404
+        ? 'The page you are looking for could not be found.'
+        : error.statusText || details;
+  } else if (import.meta.env.DEV && error instanceof Error) {
     details = error.message;
-    stack = error.stack;
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
+    <main className="min-h-screen flex flex-col justify-center items-center text-center p-8">
+      <h1 className="text-4xl font-bold mb-4">{message}</h1>
+      <p className="text-lg text-slate-600">{details}</p>
     </main>
   );
 }

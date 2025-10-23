@@ -106,16 +106,34 @@ export function HeroSection() {
     const controller = new AbortController();
     const fetchIpLocation = async () => {
       try {
-        // ipapi.co provides a quick, public JSON endpoint with lat/lon
-        const res = await fetch('https://ipapi.co/json/', { signal: controller.signal });
-        if (!res.ok) return;
-        const data = await res.json();
-        if (cancelled) return;
-        const lat = Number(data.latitude ?? data.lat);
-        const lon = Number(data.longitude ?? data.lon);
-        if (!Number.isNaN(lat) && !Number.isNaN(lon)) {
-          // only set if we don't already have a more accurate position
-          setCoords((prev) => (prev ? prev : { lat, lon }));
+
+        const candidates = ['https://ipwho.is/', 'https://geolocation-db.com/json/'];
+
+        for (const url of candidates) {
+          try {
+            const res = await fetch(url, { signal: controller.signal });
+            if (!res.ok) throw new Error('bad response');
+            const data = await res.json();
+            if (cancelled) return;
+
+            const lat = Number(data.latitude ?? data.lat ?? data.latitude ?? data.latitude);
+            const lon = Number(data.longitude ?? data.lon ?? data.longitude ?? data.longitude);
+
+            const altLat = Number(data.latitude ?? data.lat ?? data.latitude);
+            const altLon = Number(data.longitude ?? data.lon ?? data.longitude);
+
+            const useLat = !Number.isNaN(lat) ? lat : !Number.isNaN(altLat) ? altLat : NaN;
+            const useLon = !Number.isNaN(lon) ? lon : !Number.isNaN(altLon) ? altLon : NaN;
+
+            if (!Number.isNaN(useLat) && !Number.isNaN(useLon)) {
+   
+              setCoords((prev) => (prev ? prev : { lat: useLat, lon: useLon }));
+              return;
+            }
+          } catch (e) {
+            if (controller.signal.aborted) return;
+            // try next candidate
+          }
         }
       } catch {
         // ignore IP fallback failures silently
