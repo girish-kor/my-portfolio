@@ -57,6 +57,13 @@ export const meta: MetaFunction = () => {
     },
     { rel: 'canonical', href: siteUrl },
 
+    // --- Favicons ---
+    { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/icon/favicon-32x32.png' },
+    { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icon/favicon-16x16.png' },
+    { rel: 'apple-touch-icon', sizes: '180x180', href: '/icon/apple-touch-icon.png' },
+    { rel: 'manifest', href: '/icon/site.webmanifest' },
+    { rel: 'icon', href: '/icon/favicon.ico' },
+
     // --- Open Graph (Facebook, LinkedIn) ---
     { property: 'og:type', content: 'website' },
     { property: 'og:site_name', content: 'Girish Kor Portfolio' },
