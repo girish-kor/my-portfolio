@@ -5,10 +5,16 @@ import { Button } from '~/components/ui/button';
 export function StatusSection() {
   const status = [
     {
-      position: 'Frontend Developer Intern',
+      position: 'Frontend Developer',
       organization: 'STOOFERS',
       timeline: 'JUN 25 - SEP 25',
     },
+        {
+      position: 'Full Stack Developer',
+      organization: 'Connectia Technology',
+      timeline: 'JUN 24 - SEP 25',
+    },
+
     {
       position: 'B.E. in Computer Science Engineering',
       organization: 'University of Mumbai',
