@@ -7,12 +7,12 @@ export function StatusSection() {
     {
       position: 'Frontend Developer',
       organization: 'STOOFERS',
-      timeline: 'JUN 25 - SEP 25',
+      timeline: 'JUN 25 - OCT 25',
     },
         {
       position: 'Full Stack Developer',
       organization: 'Connectia Technology',
-      timeline: 'JUN 24 - SEP 25',
+      timeline: 'JUN 24 - OCT 25',
     },
 
     {
